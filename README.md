@@ -10,11 +10,11 @@ Aiming at compound fault recognition, multi-label learning easily has a strong c
 
 In the laboratory experiment, the results of nine methods are shown as follow.
 
-![image](./img/tab1.png)
+![image](https://github.com/ShiJian12345/MLIL-framework-for-multi-label-compound-fault-recognition/blob/main/img/tab1.png)
 
 In the engineering application, the results of ten methods are shown as follow.
 
-![image](./img/tab2.png)
+![image](https://github.com/ShiJian12345/MLIL-framework-for-multi-label-compound-fault-recognition/blob/main/img/tab2.png)
 
 
 ## Usage
