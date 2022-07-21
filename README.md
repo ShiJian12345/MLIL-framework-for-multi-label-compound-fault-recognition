@@ -4,17 +4,17 @@
 
 Aiming at compound fault recognition, multi-label learning easily has a strong comprehension on relevance between simultaneous mechanism faults, such as bearing defect fault and tool wear fault. Moreover, compared with single data source, multiple data sources can more fully monitor the working status of equipment. Consequently, this paper proposes a multi-source information fusion (MSIF) feature to train the multi-label deep reinforcement learning (ML-DRL) model, and develops a multi-source information fusion deep self-attention reinforcement learning (MSIF-DSARL) framework. Firstly, compound fault samples with multiple data sources are transformed into 3D wavelet coefficient tensors. Then the MSIF features are extracted from 3D tensors, using a position self-attention fusion (PSAF) module and a channel self-attention fusion (CSAF) module. Especially, the PSAF module can excavate the internal time-frequency information in every source, and the CSAF module can integrate the information differences between multiple sources. Finally, the ML-DRL model is trained with the MSIF features. In a laboratory experiment and an engineering application, diagnostic results demonstrate powerfully that the proposed framework has better superiority and practicability in recognizing compound fault, than present popular multi-label learning methods.
 
-![image](img/8.jpg)
+![image](https://github.com/ShiJian12345/MLIL-framework-for-multi-label-compound-fault-recognition/tree/main/img/8.jpg)
 
 ## Cityscapes testing set result
 
 In the laboratory experiment, the results of nine methods are shown as follow.
 
-![image](img/table1.jpg)
+![image](https://github.com/ShiJian12345/MLIL-framework-for-multi-label-compound-fault-recognition/tree/main/img/table1.jpg)
 
 In the engineering application, the results of ten methods are shown as follow.
 
-![image](img/table2.jpg)
+![image](https://github.com/ShiJian12345/MLIL-framework-for-multi-label-compound-fault-recognition/tree/main/img/table2.jpg)
 
 
 ## Usage
