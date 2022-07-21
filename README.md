@@ -6,7 +6,7 @@ Aiming at compound fault recognition, multi-label learning easily has a strong c
 
 ![image](./img/8.png)
 
-## Cityscapes testing set result
+## Ablation test
 
 In the laboratory experiment, the results of nine methods are shown as follow.
 
