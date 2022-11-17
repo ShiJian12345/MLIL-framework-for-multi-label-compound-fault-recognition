@@ -108,8 +108,11 @@ class MNISTEnv(gym.Env):
 
         return obs, reward, done, info
 
-    def convert_to_one_hot(self, y, C):
-        return np.eye(C)[y]
+    def convert_to_one_hot(self, y, num_class):
+        array = np.zeros(num_class)
+        for i in y:
+            array[i]=1
+        return array
 
     def find_true_action(self, array):
 
@@ -149,17 +152,23 @@ class MNISTEnv(gym.Env):
 
         obs_0 = self.X[self.i].astype(np.float32)
  
+        #if len(self.B)==0:
+
+        #    obs_1 = np.zeros((1,1))
+
+        #elif len(self.B)==1:
+
+        #    obs_1 = np.array([self.B[0]]).reshape(1, -1)
+
+        #elif len(self.B)>=2:
+
+        #    obs_1 = np.array([self.B[-1]]).reshape(1, -1)
+        
         if len(self.B)==0:
+            obs_1 = np.zeros((1,6))
 
-            obs_1 = np.zeros((1,1))
-
-        elif len(self.B)==1:
-
-            obs_1 = np.array([self.B[0]]).reshape(1, -1)
-
-        elif len(self.B)>=2:
-
-            obs_1 = np.array([self.B[-1]]).reshape(1, -1)
+        elif len(self.B)>=1:
+            obs_1 = self.convert_to_one_hot(self.B, 6).reshape(1, -1)
 
         obs_0 = obs_0.reshape(1, 2, 64, 64)
 

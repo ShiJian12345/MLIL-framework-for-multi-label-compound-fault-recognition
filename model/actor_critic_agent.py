@@ -25,13 +25,13 @@ class Actor(nn.Module):
         cnn.fc = nn.Sequential()
         self.cnn = cnn
 
-        self.lin0 = nn.Linear(512 + 1, 64)
+        self.lin0 = nn.Linear(512 + 6, 64)
 
         self.out_digit = nn.Linear(64, 6)
 
     def forward(self, x, y):
         x = x.view(-1, 2, self.input_dim, self.input_dim)  # (batch_size, 2, 64, 64)
-        y = y.view(-1, 1)
+        y = y.view(-1, 6)
         x4 = self.cnn(x)
 
         x4 = torch.cat((x4, y), 1)
@@ -54,13 +54,13 @@ class Critic(nn.Module):
         cnn = Discriminator(output_dim=6)
         cnn.fc = nn.Sequential()
         self.cnn = cnn
-        self.lin0 = nn.Linear(512 + 1, 64)
+        self.lin0 = nn.Linear(512 + 6, 64)
 
         self.out_critic = nn.Linear(64, 1)
 
     def forward(self, x, y):
         x = x.view(-1, 2, self.input_dim, self.input_dim)  
-        y = y.view(-1, 1)
+        y = y.view(-1, 6)
         x4 = self.cnn(x)
 
         x4 = torch.cat((x4, y), 1)
