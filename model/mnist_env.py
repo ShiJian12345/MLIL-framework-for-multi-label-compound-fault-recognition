@@ -174,7 +174,7 @@ class MNISTEnv(gym.Env):
 
         return [obs_0, obs_1]
 
-    def shu(self,seed):
+    def shu(self):
         shuffle_index = np.arange(self.count)
         np.random.shuffle(shuffle_index)
         self.X = self.X[shuffle_index]
