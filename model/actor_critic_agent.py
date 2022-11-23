@@ -228,7 +228,7 @@ class ActorCriticNNAgent():
                 nn.utils.clip_grad_norm_(self.actor_net.parameters(), self.max_grad_norm)
                 self.actor_optimizer.step()
 
-                value_loss = F.mse_loss(Gt_index, V)
+                value_loss = F.mse_loss(target_v, V)
 
                 self.critic_net_optimizer.zero_grad()
                 value_loss.backward()
