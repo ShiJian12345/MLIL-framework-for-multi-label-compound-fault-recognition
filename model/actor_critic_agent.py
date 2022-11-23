@@ -209,7 +209,7 @@ class ActorCriticNNAgent():
                 if self.training_step % 1000 == 0:
                     print('I_ep {} train {} times'.format(i_ep, self.training_step))
                 with torch.no_grad():
-                    target_v = reward[index].to(device) + (1 - done[index].to(device)) * gamma * self.critic_net(state2[index].to(device),
+                    target_v = reward[index].to(device) + (1 - done[index].to(device)) * gamma * self.critic_net(state2[index].to(device),state3[index].to(device))
  
                 V = self.critic_net(state0[index].to(device), state1[index].to(device))
                 advantage = (target_v - V).detach()
