@@ -90,7 +90,7 @@ def train(result_num, epochs, iterations, episodes, Pre_Train, file_folder_path)
     if Pre_Train:
         train_type = '/fine_tuning/'
     agent = ActorCriticNNAgent(Train=True, Pre_Train=Pre_Train, file_folder_path=file_folder_path)
-    Transition = namedtuple('Transition', ['state', 'action', 'a_log_prob', 'reward', 'next_state'])
+    Transition = namedtuple('Transition', ['state', 'action', 'a_log_prob', 'reward', 'next_state', 'done'])
 
     env = MNISTEnv(type='train', seed=None)
     start = time.time()
@@ -119,7 +119,7 @@ def train(result_num, epochs, iterations, episodes, Pre_Train, file_folder_path)
                     cross_entropys.append(loss_reward)
                     # print(action, action_prob)
                     next_state, reward, done, _ = env.step(action, loss_reward)
-                    trans = Transition(state, action, action_prob, reward, next_state)
+                    trans = Transition(state, action, action_prob, reward, next_state, done)
 
                     agent.store_transition(trans)
                     state = next_state

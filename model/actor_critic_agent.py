@@ -194,27 +194,25 @@ class ActorCriticNNAgent():
         state0 = torch.tensor([t.state[0] for t in self.buffer], dtype=torch.float)
         state1 = torch.tensor([t.state[1] for t in self.buffer], dtype=torch.float)
 
+        state2 = torch.tensor([t.next_state[0] for t in self.buffer], dtype=torch.float)
+        state3 = torch.tensor([t.next_state[1] for t in self.buffer], dtype=torch.float)
+        done = torch.tensor([t.done for t in self.buffer], dtype=torch.float).view(-1, 1)
         action = torch.tensor([t.action for t in self.buffer], dtype=torch.long).view(-1, 1)
-        reward = [t.reward for t in self.buffer]
+        reward = torch.tensor([t.reward for t in self.buffer], dtype=torch.float).view(-1, 1)
+
 
         old_action_log_prob = torch.tensor([t.a_log_prob for t in self.buffer], dtype=torch.float).view(-1, 1).to(device)
 
-        R = 0
-        Gt = []
-        for r in reward[::-1]:
-            R = r + gamma * R
-            Gt.insert(0, R)
-        Gt = torch.tensor(Gt, dtype=torch.float).to(device)
 
         for i in range(self.ppo_update_time):
             for index in BatchSampler(SubsetRandomSampler(range(len(self.buffer))), self.batch_size, False):
                 if self.training_step % 1000 == 0:
                     print('I_ep {} train {} times'.format(i_ep, self.training_step))
-                # with torch.no_grad():
-                Gt_index = Gt[index].view(-1, 1)
+                with torch.no_grad():
+                    target_v = reward[index].to(device) + (1 - done[index].to(device)) * gamma * self.critic_net(state2[index].to(device),
+ 
                 V = self.critic_net(state0[index].to(device), state1[index].to(device))
-                delta = Gt_index - V
-                advantage = delta.detach()
+                advantage = (target_v - V).detach()
 
                 action_prob = self.actor_net(state0[index].to(device), state1[index].to(device))[0].gather(1, action[index].to(device)) 
 
